@@ -1,5 +1,5 @@
 import sys
-from cryptography.fernet import Fernet
+
 # NOME
 print("CALCULADORA+ 1.0V\n")
 
@@ -55,28 +55,28 @@ class calculadora:
         return {"valor1": valor1, "valor2": valor2}
 
     def soma(valor1, valor2):
-        return (int(valor1) + int(valor2))
+        return int(valor1) + int(valor2)
 
     def subtracao(valor1, valor2):
-        return (int(valor1) - int(valor2))
+        return int(valor1) - int(valor2)
 
     def multiplicar(valor1, valor2):
-        return (int(valor1) * int(valor2))
+        return int(valor1) * int(valor2)
 
     def resto(valor1, valor2):
         try:
-            return (int(valor1) // int(valor2))
+            return int(valor1) // int(valor2)
         except:
             return "Valor nulo/inexistente"
 
     def divisao(valor1, valor2):
         try:
-            return (int(valor1) / int(valor2))
+            return int(valor1) / int(valor2)
         except:
             return "Valor nulo/inexistente"
 
     def elevar(valor1, valor2):
-        return (int(valor1) ** int(valor2))
+        return int(valor1) ** int(valor2)
 
 
 class funcoes:
@@ -103,6 +103,7 @@ class funcoes:
                   "~Feito por: 5H4D0W")
 
     def checagem_argumentos(argumentos):
+        calculo = True
         if "-f" in argumentos or "--file" in argumentos:
             try:
                 f = argumentos[argumentos.index("--file") + 1]
@@ -111,6 +112,7 @@ class funcoes:
             finally:
                 try:
                     file = f
+                    calculo = False
                 except:
                     print("ERROR[é necessário que o file tenha algum valor quando mencionado]")
                     exit()
@@ -144,7 +146,7 @@ class funcoes:
             key = ""
         if "?h" in argumentos or "?help" in argumentos:
             funcoes.ajuda()
-        return {"file": file, "insercao": insercao, "crypt": key}
+        return {"file": file, "insercao": insercao, "crypt": key, "calcular": calculo}
 
 
 # SISTEMA DE AJUDA
@@ -204,6 +206,7 @@ def retirada(file, crypt_key):
             extensao = conteudo_img_new[:10]
 
             # recebendo a extensao do escondido
+
             print("Recebendo a extensao do escondido")
             if b"JPG" in extensao or b"JFIF" in extensao:
                 extensao = "jpg"
@@ -211,6 +214,8 @@ def retirada(file, crypt_key):
                 extensao = "png"
             elif b"PK" in extensao:
                 extensao = "zip"
+            else:
+                extensao = "txt"
             nome = nome + '.' + str(extensao)
             if conteudo_img_new != b"":
                 new_file = open(nome, "ab")
