@@ -101,7 +101,7 @@ class funcoes:
                   "por este motivo, criei a funcionalidade de uma calculadora para ser mais discreto.\n"
                   "Espero que lhe sirva\n\n\n"
                   "~Feito por: 5H4D0W")
-
+            exit()
     def checagem_argumentos(argumentos):
         calculo = True
         if "-f" in argumentos or "--file" in argumentos:
